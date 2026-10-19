@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="robots" content="noindex,follow">
+  <title>App Tester — Continue Onboarding</title>
+  <meta name="description" content="Continue your onboarding. Earn passive rewards for your screen time. US residents 18+." />
+  <meta name="theme-color" content="#0a0820" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/assets/favicon.svg" />
+
+  <!-- ClickMagick tracking — GFL project (same as gameflowlabs / pocketcrew) -->
+  <script>
+    (function(){
+      var k = 'gfl_eid';
+      var eid = null;
+      try { eid = localStorage.getItem(k); } catch(e){}
+      if (!eid) {
+        eid = (crypto && crypto.randomUUID) ? crypto.randomUUID() :
+          'eid_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2,10);
+        try { localStorage.setItem(k, eid); } catch(e){}
+      }
+      window.clickmagick_cmc = {
+        uid: '211897',
+        hid: '2728055707',
+        cmc_project: 'GFL',
+        vid_info: 'on',
+        utm_source: 'organic',
+        external_id: eid,
+      };
+    })();
+  </script>
+  <script src="https://cm.ssaff.link/44449f75.js" async></script>
+
+  <style>
+    :root {
+      --bg: #0a0820;
+      --bg-2: #14102e;
+      --purple: #7c5cff;
+      --purple-2: #9b82ff;
+      --cyan: #32BBB9;
+      --cyan-2: #4dd4d6;
+      --text: #ffffff;
+      --muted: #9ea0c2;
+      --light: #f4f5ff;
+      --light-2: #e6e7ff;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+    @media (min-width: 720px) { .container { padding: 0 24px; } }
+
+    /* HEADER */
+    header {
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 50;
+    }
+    @media (min-width: 720px) { header { padding: 18px 0; } }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .brand img { width: 34px; height: 34px; }
+    .brand-name {
+      background: linear-gradient(90deg, var(--purple-2), var(--cyan-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: none;
+      gap: 28px;
+      font-size: 15px;
+      color: var(--muted);
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .lang-pill {
+      display: none;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+      color: var(--text);
+    }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.2);
+      background: transparent;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.35); }
+
+    @media (min-width: 800px) {
+      .nav-links { display: flex; }
+      .lang-pill { display: inline-flex; }
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 40px 0 80px;
+    }
+    @media (min-width: 720px) {
+      .hero { padding: 60px 0 120px; }
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(124,92,255,.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* HERO MOCKUP — bottom right, desktop only */
+    .hero-mockup {
+      display: none;
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 420px;
+      pointer-events: none;
+      z-index: 0;
+      filter: drop-shadow(0 30px 60px rgba(0,0,0,.5));
+    }
+    .hero-mockup img { width: 100%; height: auto; display: block; }
+    @media (min-width: 1024px) {
+      .hero-mockup { display: block; }
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      background: rgba(50,187,185,.08);
+      border: 1px solid rgba(50,187,185,.25);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin: 0 auto 18px;
+    }
+    .hero-h1 {
+      font-size: clamp(32px, 5.5vw, 52px);
+      line-height: 1.05;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      margin: 0 0 14px;
+    }
+    .hero-sub {
+      font-size: 18px;
+      line-height: 1.5;
+      color: var(--muted);
+      margin: 0 0 32px;
+    }
+    .hero-sub strong { color: var(--cyan-2); font-weight: 800; }
+
+    /* Referral code box */
+    .code-box {
+      width: 100%;
+      max-width: 440px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 16px;
+      padding: 18px;
+      margin: 0 auto 16px;
+      text-align: left;
+    }
+    @media (min-width: 720px) { .code-box { padding: 22px; } }
+    .code-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: #ff6b6b;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      transition: color .3s ease;
+    }
+    .code-label.verified { color: #22c55e; }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,107,107,.1);
+      color: #ff6b6b;
+      border: 1px solid rgba(255,107,107,.3);
+      margin-bottom: 12px;
+      transition: all .3s ease;
+    }
+    .status-pill .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 8px currentColor;
+      animation: pulseDot 2s ease-in-out infinite;
+    }
+    .status-pill.verifying {
+      background: rgba(255,193,7,.1);
+      color: #ffc107;
+      border-color: rgba(255,193,7,.3);
+    }
+    .status-pill.verified {
+      background: rgba(34,197,94,.12);
+      color: #22c55e;
+      border-color: rgba(34,197,94,.35);
+    }
+    @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    .ref-num {
+      margin-top: 10px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+    }
+    .ref-num .pre { color: rgba(255,255,255,.4); }
+    .code-input {
+      width: 100%;
+      background: rgba(255,255,255,.06);
+      border: 1.5px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      padding: 16px 18px;
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      outline: none;
+      transition: border-color .15s;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      text-transform: uppercase;
+    }
+    .code-input::placeholder { color: var(--muted); font-weight: 500; letter-spacing: 0.02em; text-transform: none; }
+    .code-input:focus { border-color: var(--cyan); background: rgba(50,187,185,.06); }
+    .code-help {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .code-err {
+      display: none;
+      margin-top: 10px;
+      font-size: 13px;
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+    .code-err.show { display: block; }
+
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: var(--purple);
+      color: white;
+      padding: 18px 38px;
+      border-radius: 14px;
+      font-size: 17px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 40px -10px rgba(124,92,255,.55);
+      transition: transform .15s, box-shadow .15s, opacity .15s;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      font-family: inherit;
+      max-width: 440px;
+      width: 100%;
+    }
+    .cta-btn:hover { transform: translateY(-1px); box-shadow: 0 14px 50px -10px rgba(124,92,255,.7); }
+    .cta-btn:active { transform: translateY(0); }
+    .cta-btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; }
+    #go { display: none; }
+    #go.show { display: inline-flex; }
+
+    /* DEVICE QUESTION */
+    .device-q { width: 100%; max-width: 440px; margin: 0 auto 18px; }
+    .device-label {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 12px;
+      text-align: center;
+    }
+    .device-chips { display: flex; gap: 10px; }
+    .device-chip {
+      flex: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 18px 12px;
+      border-radius: 14px;
+      border: 1.5px solid rgba(50,187,185,.45);
+      background: rgba(50,187,185,.08);
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .15s, background .15s, box-shadow .15s;
+    }
+    .device-chip:hover { border-color: var(--cyan); background: rgba(50,187,185,.14); }
+    .device-chip.selected {
+      border-color: var(--cyan);
+      background: rgba(50,187,185,.2);
+      box-shadow: 0 0 0 1px var(--cyan), 0 8px 30px -10px rgba(50,187,185,.5);
+    }
+
+    /* VERIFY OVERLAY */
+    .verify-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      background: var(--bg);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .verify-overlay.show { display: flex; }
+    .verify-box { width: 100%; max-width: 400px; }
+    .verify-title {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+    .verify-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      color: var(--muted);
+      padding: 10px 0;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity .35s ease, transform .35s ease;
+    }
+    .verify-line.in { opacity: 1; transform: translateY(0); }
+    .verify-line.done { color: var(--light-2); }
+    .verify-line .ok { color: #22c55e; font-weight: 700; }
+    .verify-line .mini-spin {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,.25);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spinAnim .8s linear infinite;
+    }
+    .cta-btn .spin {
+      width: 16px; height: 16px;
+      border: 2px solid rgba(255,255,255,.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spinAnim 0.8s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spinAnim { to { transform: rotate(360deg); } }
+    .terms-link {
+      display: block;
+      margin-top: 14px;
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+    .terms-link:hover { color: var(--text); }
+
+    /* RATING ROW (above hero headline) */
+    .rating-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: white;
+      font-weight: 600;
+      margin: 0 auto 22px;
+    }
+    .rating-row .stars { color: #fbbf24; letter-spacing: -1px; font-size: 15px; }
+    .rating-row .count { color: var(--muted); font-weight: 500; }
+
+    .trust {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+    .trust-avatars { display: flex; }
+    .trust-avatars img {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      border: 2.5px solid var(--bg);
+      margin-left: -10px;
+      object-fit: cover;
+      background: var(--bg-2);
+    }
+    .trust-avatars img:first-child { margin-left: 0; }
+    .trust-txt { font-size: 14px; color: var(--muted); }
+
+    /* HOW TO EARN section */
+    .how {
+      background: var(--light);
+      color: #0a0820;
+      padding: 60px 0 70px;
+      border-radius: 28px 28px 0 0;
+      margin-top: -20px;
+      position: relative;
+      z-index: 2;
+    }
+    @media (min-width: 720px) {
+      .how { padding: 80px 0 100px; border-radius: 32px 32px 0 0; margin-top: -40px; }
+    }
+    .how-card {
+      background: white;
+      border-radius: 20px;
+      padding: 30px 20px;
+      max-width: 920px;
+      margin: 0 auto;
+      box-shadow: 0 20px 50px -20px rgba(124,92,255,.18);
+    }
+    @media (min-width: 720px) {
+      .how-card { border-radius: 24px; padding: 50px 30px; }
+    }
+    .how-h {
+      font-size: clamp(28px, 4vw, 38px);
+      font-weight: 800;
+      text-align: center;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .how-sub {
+      text-align: center;
+      color: #5a5d80;
+      font-size: 15px;
+      margin: 0 0 40px;
+    }
+    .how-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 720px) {
+      .how-steps { grid-template-columns: repeat(3, 1fr); }
+    }
+    .step {
+      text-align: center;
+      padding: 18px;
+    }
+    .step-num {
+      width: 48px; height: 48px;
+      margin: 0 auto 14px;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+    .step h4 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+    .step p { margin: 0; font-size: 14px; color: #5a5d80; line-height: 1.55; }
+
+    /* WHY section */
+    .why {
+      background: var(--light);
+      color: #0a0820;
+      padding: 0 0 100px;
+    }
+    .why-card {
+      max-width: 920px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, var(--bg-2), #1a1640);
+      color: white;
+      padding: 36px 22px;
+      border-radius: 20px;
+      text-align: center;
+    }
+    @media (min-width: 720px) { .why-card { padding: 50px 36px; border-radius: 24px; margin: 40px auto 0; } }
+    .why-h { font-size: clamp(24px, 3.5vw, 32px); font-weight: 800; margin: 0 0 14px; letter-spacing: -0.02em; }
+    .why-p { font-size: 16px; color: var(--muted); margin: 0 auto 28px; max-width: 600px; }
+    .why-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: white;
+      color: var(--purple);
+      padding: 14px 30px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .why-cta:hover { background: var(--cyan); color: #0a0820; }
+
+    /* FAQ */
+    .faq {
+      background: var(--light);
+      padding: 64px 0 80px;
+    }
+    .faq-wrap { max-width: 720px; margin: 0 auto; }
+    .faq-h {
+      text-align: center;
+      font-size: clamp(24px, 3vw, 30px);
+      font-weight: 800;
+      margin: 0 0 30px;
+      color: #0a0820;
+      letter-spacing: -0.02em;
+    }
+    .faq-item {
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      padding: 18px 22px;
+      color: #0a0820;
+    }
+    .faq-q {
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-q::after { content: "+"; font-size: 20px; color: var(--purple); }
+    details[open] .faq-q::after { content: "−"; }
+    .faq-a {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #5a5d80;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg);
+      padding: 40px 0 30px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      text-align: center;
+      align-items: center;
+    }
+    @media (min-width: 720px) {
+      .footer-row { grid-template-columns: auto 1fr auto; text-align: left; }
+      .footer-col-center { text-align: center; }
+      .footer-col-right { text-align: right; }
+    }
+    .footer-links { display: flex; gap: 22px; justify-content: center; }
+    @media (min-width: 720px) { .footer-links { justify-content: flex-end; } }
+    .footer-links a:hover { color: var(--text); }
+    .footer-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    @media (min-width: 720px) { .footer-badges { justify-content: flex-start; } }
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 8px;
+      padding: 7px 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color .15s;
+    }
+    .footer-badge:hover { border-color: rgba(255,255,255,.45); }
+    .footer-badge svg { flex-shrink: 0; }
+    .footer-badge .bt { display: flex; flex-direction: column; line-height: 1.1; }
+    .footer-badge .bt-sm { font-size: 8px; color: rgba(255,255,255,.7); letter-spacing: 0.02em; }
+    .footer-badge .bt-lg { font-size: 12px; font-weight: 600; color: white; letter-spacing: 0.01em; }
+    .footer-meta { font-size: 11px; color: #5a5d80; max-width: 640px; margin: 0 auto; }
+
+    /* STICKY MOBILE CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: var(--light-2);
+      color: #0a0820;
+      padding: 12px 16px;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,.15);
+      z-index: 40;
+      transform: translateY(120%);
+      transition: transform .4s ease;
+    }
+    .sticky-cta.show { transform: translateY(0); }
+    .sticky-cta-txt { font-size: 14px; font-weight: 600; }
+    .sticky-cta-btn {
+      background: white;
+      color: var(--purple);
+      border: 1px solid var(--purple);
+      padding: 10px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .sticky-cta-btn:hover { background: var(--purple); color: white; }
+  </style>
+  <!-- Google Analytics (GA4) — property: apptesterhq.com -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J06LH5VQP8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-J06LH5VQP8');
+    gtag('config', 'AW-18416384212');
+  </script>
+    <!-- Microsoft Advertising (Bing Ads) UET tag, ti 97272931 -->
+    <script>(function(w, d, t, u, o) {w[u] = w[u] || [], o.ts = (new Date).getTime();var n = d.createElement(t);n.src = "https://bat.bing.net/bat.js?ti=" + o.ti + ("uetq" != u ? "&q=" + u : ""),n.async = 1, n.onload = n.onreadystatechange = function() {var s = this.readyState;s && "loaded" !== s && "complete" !== s ||(o.q = w[u], w[u] = new UET(o), w[u].push("pageLoad"),n.onload = n.onreadystatechange = null)};var i = d.getElementsByTagName(t)[0];i.parentNode.insertBefore(n, i);})(window, document, "script", "uetq", {ti: "97272931",enableAutoSpaTracking: true});</script>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="/">
+        <span class="brand-name">App Tester Panel</span>
+      </a>
+<div class="nav-right">
+        <span class="lang-pill">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8h14M5 8a7 7 0 1014 0M12 3v18"/></svg>
+          English
+        </span>
+        <a href="#hero-cta" class="btn-outline">Begin Signup</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="hero-cta">
+    <div class="container hero-grid">
+      <div class="rating-row" aria-label="App rating">
+        <span class="stars">★★★★★</span>
+        <strong>4.6</strong>
+        <span class="count">· 12,400 reviews</span>
+      </div>
+      <h1 class="hero-h1">Get Paid to Test Apps and Share Your Screen Time.</h1>
+      <p class="hero-sub">Download the app and start earning — <strong>up to $300 per week</strong></p>
+
+      <div class="device-q" id="deviceQ">
+        <div class="device-label">Which device do you use?</div>
+        <div class="device-chips">
+          <button class="device-chip" type="button" data-device="iPhone (iOS)" data-os="iOS">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            iPhone / iOS
+          </button>
+          <button class="device-chip" type="button" data-device="Android" data-os="Android">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6 18c0 .55.45 1 1 1h1v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h2v3.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5V19h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zm-4.97-5.84l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.98-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg>
+            Android
+          </button>
+        </div>
+      </div>
+
+      <button class="cta-btn" id="go" type="button">Begin Signup →</button>
+      <div class="trust">
+        <div class="trust-avatars">
+          <img src="https://images.pexels.com/photos/33970123/pexels-photo-33970123.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/14950779/pexels-photo-14950779.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/6497112/pexels-photo-6497112.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+          <img src="https://images.pexels.com/photos/16869444/pexels-photo-16869444.jpeg?auto=compress&cs=tinysrgb&h=130&w=130&fit=crop" alt="" loading="lazy" />
+        </div>
+        <span class="trust-txt">Relied on by panelists nationwide.</span>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="how">
+    <div class="container">
+      <div class="how-card">
+        <h2 class="how-h">How you earn</h2>
+        <p class="how-sub">Three steps. Five minutes. Passive earnings from there on.</p>
+        <div class="how-steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h4>Begin Signup</h4>
+            <p>Pick your device above and tap Begin Signup to start your application.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h4>Install</h4>
+            <p>Get the Nielsen Pulse app on your phone. iPhone and Android both work.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h4>Earn</h4>
+            <p>Complete the in-app setup. Earn in the background — no daily tasks needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="why">
+    <div class="container">
+      <div class="why-card">
+        <h3 class="why-h">Why you get rewarded</h3>
+        <p class="why-p">Brands and researchers want genuine insight into how people really use their phones. By joining the panel, you help shape the future of digital products — and get rewarded for it.</p>
+        <button class="why-cta" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Begin Signup ↑</button>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .proof { padding: 40px 0 56px; text-align: center; }
+    .proof-drawer { margin: 0 auto; }
+    .proof-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; padding: 14px 4px; font-weight: 700; font-size: 20px; color: var(--cyan); list-style: none; user-select: none; }
+    .proof-toggle::-webkit-details-marker { display: none; }
+    .proof-toggle svg { width: 22px; height: 22px; transition: transform .25s ease; flex: none; }
+    .proof-drawer[open] .proof-toggle svg { transform: rotate(180deg); }
+    .proof-content { padding: 16px 0 0; }
+    .payout-img { display: block; width: 100%; max-width: 330px; margin: 0 auto; border-radius: 16px; box-shadow: 0 16px 44px rgba(0,0,0,.45); }
+    .receipt { max-width: 420px; margin: 0 auto; background: #ffffff; color: #1a1a2e; border-radius: 16px; box-shadow: 0 18px 50px rgba(0,0,0,.45); overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    .receipt-head { padding: 30px 26px 22px; text-align: center; }
+    .receipt-check { width: 74px; height: 74px; margin: 0 auto 16px; }
+    .receipt-amt { font-size: 27px; font-weight: 600; color: #1a1a2e; margin: 0; }
+    .receipt-from { color: #6b7280; font-size: 15px; margin: 8px 0 0; }
+    .receipt-body { border-top: 1px solid #ececf1; padding: 20px 26px 26px; }
+    .receipt-item { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; }
+    .receipt-item .ri-name { font-weight: 600; font-size: 15px; }
+    .receipt-item .ri-id { color: #9095a6; font-size: 12.5px; margin-top: 3px; }
+    .receipt-item .ri-amt { font-weight: 600; font-size: 15px; white-space: nowrap; }
+    .receipt-item .ri-amt small { color: #9095a6; font-weight: 500; font-size: 11px; }
+    .receipt-row { display: flex; justify-content: space-between; font-size: 14px; color: #4b4f63; padding: 7px 0; border-top: 1px solid #f2f2f6; }
+    .receipt-row:first-of-type { border-top: 1px solid #ececf1; margin-top: 4px; padding-top: 14px; }
+    .receipt-row.total { font-weight: 700; color: #1a1a2e; font-size: 16px; border-top: 1px solid #ececf1; margin-top: 6px; padding-top: 14px; }
+    .receipt-pp { text-align:center; padding: 0 0 20px; }
+    .receipt-pp span { font-weight: 800; font-size: 15px; }
+    .receipt-pp .pp1 { color:#003087; } .receipt-pp .pp2 { color:#009cde; }
+  </style>
+  <section class="proof">
+    <div class="container">
+      <details class="proof-drawer">
+        <summary class="proof-toggle">
+          <span>See Payout Examples</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <div class="proof-content">
+      <img class="payout-img" src="/assets/payout-proof.png" alt="PayPal receipt — you received $520.00 USD from apptesterhq.com" loading="lazy" />
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <div class="container faq-wrap">
+      <h3 class="faq-h">Common Questions</h3>
+      <details class="faq-item">
+        <summary class="faq-q">How does signup work?</summary>
+        <div class="faq-a">Tap Finish Signup above, install the app, and complete the in-app setup. The entire process takes roughly five minutes.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">What data does Nielsen Pulse gather?</summary>
+        <div class="faq-a">The Nielsen Pulse app quietly tracks which apps and sites you visit. It never records passwords, messages, or personal content. Complete details are shown during setup.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">How much can I make?</summary>
+        <div class="faq-a">Rewards depend on participation, device, and the platform's terms. Your dashboard displays current earnings anytime.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Who's eligible?</summary>
+        <div class="faq-a">US residents 18+ with a compatible iPhone, iPad, or Android device. Your signup agent verifies eligibility before you proceed.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">Can I quit the panel whenever?</summary>
+        <div class="faq-a">Yes. Delete the app from your phone whenever you like. No cancellation fees, no strings attached.</div>
+      </details>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-row">
+        <div class="footer-badges">
+          <div class="footer-badge" role="button" tabindex="0" data-device="iPhone (iOS)" aria-label="Available on the App Store">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            <div class="bt"><span class="bt-sm">Available on the</span><span class="bt-lg">App Store</span></div>
+          </div>
+          <div class="footer-badge" role="button" tabindex="0" data-device="Android" aria-label="Get it on Google Play">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 20.5V3.5c0-.59.34-1.11.84-1.35l13.69 9.85L3.84 21.85c-.5-.25-.84-.76-.84-1.35z" fill="#00D4FF"/><path d="M16.81 15.12L6.05 21.34l8.49-8.49 2.27 2.27z" fill="#FF3D44"/><path d="M20.16 10.81c.5.28.83.8.83 1.37s-.33 1.09-.83 1.37l-3.34 1.94-2.27-2.27 2.27-2.27 3.34 1.86z" fill="#FFB700"/><path d="M6.05 2.66l10.76 6.22-2.27 2.27L6.05 2.66z" fill="#00F076"/></svg>
+            <div class="bt"><span class="bt-sm">GET IT ON</span><span class="bt-lg">Google Play</span></div>
+          </div>
+        </div>
+        <div class="footer-col-center">© <span id="yr"></span> App Tester · Nielsen Pulse signup</div>
+        <div class="footer-links footer-col-right">
+          <a href="https://trk.ssaff.link/nielsen-privacy" target="_blank" rel="noopener">Privacy</a>
+          <a href="https://trk.ssaff.link/nielsen-terms" target="_blank" rel="noopener">Terms</a>
+          <a href="mailto:hello@apptester.online">Contact</a>
+        </div>
+      </div>
+      <div class="footer-meta" style="margin-top: 18px; text-align: center;">
+        Rewards depend on participation and platform terms. Open to US residents 18+. Nielsen Pulse is run by Nielsen.
+      </div>
+    </div>
+  </footer>
+
+  <div class="verify-overlay" id="verifyOverlay" aria-live="polite">
+    <div class="verify-box">
+      <div class="verify-title">Preparing your signup</div>
+      <div class="verify-line" id="vl1"><span class="mini-spin"></span><span>Verifying your connection…</span></div>
+      <div class="verify-line" id="vl2"><span class="mini-spin"></span><span>Validating your device…</span></div>
+      <div class="verify-line" id="vl3"><span class="mini-spin"></span><span>Holding your test slot…</span></div>
+      <div class="verify-line" id="vl4"><span class="mini-spin"></span><span>Sending you to the eligibility check…</span></div>
+    </div>
+  </div>
+
+  <div class="sticky-cta" id="stickyCta">
+    <div class="sticky-cta-txt">Ready to begin?</div>
+    <button class="sticky-cta-btn" type="button" onclick="window.scrollTo({top:0,behavior:'smooth'});">Continue ↑</button>
+  </div>
+
+  <script>
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    var ROTATOR = "https://hbsv1.bemobtrcks.com/go/bdc78937-4abf-4d25-9e64-1585201bc563"; // BeMob Bing campaign /go/... — create it (Microsoft Ads traffic source, CPC cost model) then paste here
+    var BRAND_SLUG = "ath-bing";
+
+    var goBtn = document.getElementById('go');
+    var overlay = document.getElementById('verifyOverlay');
+    var selectedDevice = null;
+
+    function readCookie(name){
+      var m = document.cookie.match(new RegExp('(^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[2]) : null;
+    }
+
+    // Silent per-VA attribution: ?ref=CODE (or ?code=) from VA links passes through as [s3]
+    var qp = new URLSearchParams(window.location.search);
+    // Bing auto-tag click id — MUST reach BeMob so the conversion can be credited back to Bing (offline import by msclkid)
+    var msclkid = qp.get('msclkid') || '';
+    var gclid = qp.get('gclid') || ''; // Google auto-tag click id — reaches BeMob, then offline-import credits the conversion to Google Ads
+    var kw = qp.get('kw') || ''; // ValueTrack {keyword} → keyword-level attribution
+    var refCode = (qp.get('ref') || qp.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+
+    // Device question → reveal CTA
+    var chips = document.querySelectorAll('.device-chip');
+    chips.forEach(function(ch){
+      ch.addEventListener('click', function(){
+        chips.forEach(function(c){ c.classList.remove('selected'); });
+        ch.classList.add('selected');
+        selectedDevice = ch.getAttribute('data-device');
+        var os = ch.getAttribute('data-os');
+        var icon = ch.querySelector('svg');
+        goBtn.innerHTML = (icon ? icon.outerHTML + ' ' : '') + 'Begin ' + os + ' Signup →';
+        goBtn.classList.add('show');
+      });
+    });
+
+    // Prefetch IP location so it's ready by the time they click
+    var geoTxt = 'United States';
+    try {
+      fetch('https://get.geojs.io/v1/ip/geo.json')
+        .then(function(r){ return r.json(); })
+        .then(function(j){ if (j && j.city) geoTxt = j.city + (j.region ? ', ' + j.region : ''); })
+        .catch(function(){});
+    } catch(e){}
+
+    function completeLine(el, text){
+      el.innerHTML = '<span class="ok">✓</span><span>' + text + '</span>';
+      el.classList.add('done');
+    }
+
+    function startOnboarding(){
+      overlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+
+      var cmcVid = readCookie('cmc_vid') || (window.clickmagick_cmc && window.clickmagick_cmc.vid) || '123';
+      // BeMob sub-ids: s1=brand · s2=referral/source · s3=cmc_vid click id
+      var href = ROTATOR + '?s1=' + encodeURIComponent(BRAND_SLUG) + '&s2=' + encodeURIComponent(msclkid || 'nomsclkid') + '&s3=' + encodeURIComponent(gclid || 'nogclid') + '&s4=' + encodeURIComponent(kw || '');
+
+      try { if(window.fbq) window.fbq('track','Lead',{content_name:'apptester_onboarding_continue', ref_code: refCode || 'none', device: selectedDevice || 'unknown'}); } catch(e){}
+
+      // Google Ads conversion "CTA Click (App Tester)" (id 7777884387, Outbound click, primary)
+      // — fires at CTA click, well before the 4.4s redirect. (Bing UET tag to be added separately.)
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', {
+            'send_to': 'AW-18416384212/CZ0HCOOx5PwcENTxzs1E',
+            'value': 1.0,
+            'currency': 'USD'
+          });
+        }
+      } catch(e){}
+
+      var vl1 = document.getElementById('vl1'), vl2 = document.getElementById('vl2'),
+          vl3 = document.getElementById('vl3'), vl4 = document.getElementById('vl4');
+
+      setTimeout(function(){ vl1.classList.add('in'); }, 150);
+      setTimeout(function(){ completeLine(vl1, 'Connected from ' + geoTxt); }, 1100);
+      setTimeout(function(){ vl2.classList.add('in'); }, 1250);
+      setTimeout(function(){ completeLine(vl2, 'Device confirmed: ' + (selectedDevice || 'Mobile')); }, 2000);
+      setTimeout(function(){ vl3.classList.add('in'); }, 2150);
+      setTimeout(function(){ completeLine(vl3, 'Test slot reserved'); }, 2900);
+      setTimeout(function(){ vl4.classList.add('in'); }, 3050);
+      setTimeout(function(){ window.location.href = href; }, 4400);
+    }
+
+    goBtn.onclick = startOnboarding;
+
+    // Footer store badges → same funnel, device implied by the badge
+    document.querySelectorAll('.footer-badge[data-device]').forEach(function(b){
+      b.addEventListener('click', function(){
+        selectedDevice = b.getAttribute('data-device');
+        startOnboarding();
+      });
+    });
+
+    // Sticky mobile CTA
+    var sticky = document.getElementById('stickyCta');
+    window.addEventListener('scroll', function(){
+      if (window.scrollY > 600) sticky.classList.add('show');
+      else sticky.classList.remove('show');
+    }, { passive: true });
+  </script>
+</body>
+</html>
